@@ -86,7 +86,7 @@
 
         .hero {
             position: relative;
-            background: url('images/khabib1.jpg') center/cover no-repeat;
+            background: url('images/khabib2.jpg') center/cover no-repeat;
             background-size: cover;
             color: white;
             padding: 120px 20px;
@@ -198,10 +198,10 @@
 
         h2 {
             font-size: 36px;
-            color: #000000;
+            color: #ffffff;
             margin-bottom: 30px;
             text-align: center;
-            border-bottom: 3px solid #ff0000;
+            border-bottom: 3px solid var(--accent-red);
             padding-bottom: 15px;
         }
 
@@ -346,7 +346,11 @@
         .inline-figure figcaption { font-size: 14px; color: #666; max-width: 560px; }
 
         /* Galería distribuida: los disparadores usan la clase .lightbox-trigger */
-        .gallery { display: none; }
+        /* Galería: grid de miniaturas */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 20px; }
+        .gallery-grid img { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 18px 40px rgba(2,6,23,0.6); cursor: pointer; transition: transform 0.15s ease; }
+        .gallery-grid img:hover { transform: translateY(-6px) scale(1.02); }
+        .lightbox-trigger { cursor: pointer; border-radius: 8px; transition: transform 0.2s ease; }
         .lightbox-trigger { cursor: pointer; border-radius: 8px; transition: transform 0.2s ease; }
         .lightbox-trigger:hover { transform: scale(1.02); }
 
@@ -472,10 +476,7 @@
                         A lo largo de su carrera ganó reconocimiento mundial en el UFC, donde se convirtió en campeón indiscutible de la división de peso ligero. Tras defender su título en ocasiones clave, se retiró en 2020 con un récord profesional inmaculado: 29 victorias y 0 derrotas. Su legado incluye no solo resultados, sino influencia en la técnica y entrenamiento de las nuevas generaciones.
                     </p>
 
-                    <figure class="inline-figure">
-                        <img src="images/khabib2.jpg" alt="Khabib aplicando control posicional" class="lightbox-trigger" loading="lazy" decoding="async">
-                        <figcaption>Khabib aplicando control posicional y grappling en competición. Imagen editorial representativa.</figcaption>
-                    </figure>
+
 
                     <p>
                         Además de su carrera deportiva, Khabib es conocido por su disciplina, su apego a la familia y su papel como mentor. Tras retirarse ha fundado proyectos deportivos y academias para impulsar el talento en Daguestán y otras regiones.
@@ -528,10 +529,7 @@
 
                 <p><strong>Rutina y equipo:</strong> Durante su carrera se entrenó bajo la supervisión de su padre y con un equipo de luchadores del Cáucaso. Sus sesiones combinaban acondicionamiento físico, técnicas de lucha y sparring intenso. Su entrenamiento típico incluía trabajo de resistencia, rounds de grappling, técnica de sumisiones y sesiones específicas para mejorar la respiración y la recuperación. Tras el fallecimiento de su padre en 2020, Khabib se ha centrado en ser mentor, abriendo gimnasios y apoyando a la nueva generación de peleadores.</p>
 
-                <figure class="inline-figure">
-                    <img src="images/khabib3.jpg" alt="Khabib durante entrenamiento" class="lightbox-trigger" loading="lazy" decoding="async">
-                    <figcaption>Entrenamiento en campamento: trabajo de grappling y acondicionamiento (imagen editorial).</figcaption>
-                </figure>
+
             </div>
         </section>
 
@@ -542,10 +540,7 @@
 
                 <p><strong>Actividades fuera del octágono:</strong> Khabib invierte tiempo en su fundación deportiva, apoya eventos benéficos y participa en iniciativas educativas y deportivas en Daguestán. También ha aparecido como comentarista y analista en medios especializados y mantiene relaciones con marcas deportivas.</p>
 
-                <figure class="inline-figure">
-                    <img src="images/khabib4.jpg" alt="Khabib con su familia en acto público" class="lightbox-trigger" loading="lazy" decoding="async">
-                    <figcaption>Khabib con su familia en un acto público. La familia y la fe han sido pilares importantes en su vida fuera del octágono.</figcaption>
-                </figure>
+
             </div>
         </section>
 
@@ -557,10 +552,7 @@
                     <div class="fight-date">UFC 229 - 6 de octubre de 2018</div>
                     <span class="result win">VICTORIA</span>
                     <p>Khabib y McGregor protagonizaron una de las peleas más mediáticas en la historia del UFC. Khabib impuso su dominio con takedowns constantes y control en el suelo, finalizando por sumisión (neck crank) en el cuarto asalto. El combate terminó con incidentes fuera del octágono que también marcaron la historia del evento.</p>
-                    <figure class="inline-figure">
-                        <img src="images/khabib1.jpg" alt="Khabib vs Conor McGregor - UFC 229" class="lightbox-trigger" loading="lazy" decoding="async">
-                        <figcaption>Acción durante UFC 229 (6 Oct 2018): Khabib Nurmagomedov vs Conor McGregor. Imagen representativa del control posicional que definió el combate.</figcaption>
-                    </figure>
+
                 </div>
 
                 <div class="fight-card">
@@ -666,7 +658,15 @@
             </div>
         </section>
 
-        <!-- Galería eliminada: imágenes distribuidas en las secciones correspondientes -->
+        <section id="gallery">
+            <h2>Galería</h2>
+            <div class="gallery-grid">
+                <img src="images/khabib2.jpg" alt="Khabib en competición" class="lightbox-trigger" loading="lazy" decoding="async">
+                <img src="images/khabib3.jpg" alt="Khabib entrenando" class="lightbox-trigger" loading="lazy" decoding="async">
+                <img src="images/khabib4.jpg" alt="Khabib con su familia" class="lightbox-trigger" loading="lazy" decoding="async">
+                <img src="images/khabib1.jpg" alt="Khabib en UFC" class="lightbox-trigger" loading="lazy" decoding="async">
+            </div>
+        </section>
 
         <!-- Lightbox modal (uso con imágenes .lightbox-trigger) -->
         <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Visor de imágenes" tabindex="-1">
