@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khabib Nurmagomedov - The Eagle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #ff0000;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://upload.wikimedia.org/wikipedia/commons/e/e9/Khabib_Nurmagomedov_2018.jpg') center/cover;
+            color: white;
+            padding: 150px 20px;
+            text-align: center;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            animation: slideDown 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: #ff0000;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+            animation: slideUp 0.8s ease 0.2s backwards;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            font-size: 36px;
+            color: #000000;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #ff0000;
+            padding-bottom: 15px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-box {
+            background: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .fights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .fight-card {
+            background: white;
+            border: 2px solid #1a3a52;
+            border-radius: 8px;
+            padding: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .fight-card:hover {
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
+        }
+
+        .fight-card h3 {
+            color: #ff0000;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .fight-date {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .result {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .result.win {
+            background: #4caf50;
+            color: white;
+        }
+
+        .result.loss {
+            background: #f44336;
+            color: white;
+        }
+
+        .achievements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .achievement {
+            background: linear-gradient(135deg, #1a3a52, #ff0000);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .achievement:hover {
+            transform: scale(1.05);
+        }
+
+        .achievement h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .achievement p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            nav ul {
+                gap: 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🦅 KHABIB</div>
+            <ul>
+                <li><a href="#about">Acerca de</a></li>
+                <li><a href="#record">Récord</a></li>
+                <li><a href="#achievements">Logros</a></li>
+                <li><a href="#gallery">Galería</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>KHABIB NURMAGOMEDOV</h1>
+        <p>"The Eagle" - Leyenda del UFC</p>
+    </section>
+
+    <div class="container">
+        <section id="about">
+            <h2>Acerca de Khabib</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        Khabib Abdulmagomedovich Nurmagomedov es un luchador ruso de artes marciales mixtas (MMA), 
+                        nacido el 20 de septiembre de 1988 en Makhachkala, Daguestán, Rusia. Es considerado uno de 
+                        los mejores peleadores de todos los tiempos y una leyenda del UFC.
+                    </p>
+                    <p>
+                        Criado en un ambiente de lucha desde temprana edad, Khabib fue entrenado por su padre Abdulmanap 
+                        Nurmagomedov, quien fue su mentor principal hasta su fallecimiento en 2020. Su dedicación y disciplina 
+                        lo llevaron a convertirse en campeón del UFC en la división de peso ligero.
+                    </p>
+                    <p>
+                        El apodo "The Eagle" (El Águila) se debe a su capacidad para controlar a sus oponentes desde posiciones 
+                        de superioridad y su dominancia en todas las áreas del combate. Se retiró de la competencia en 2020 
+                        con un récord perfecto.
+                    </p>
+                </div>
+                <div>
+                    <div class="stats">
+                        <div class="stat-box">
+                            <div class="stat-number">29</div>
+                            <div class="stat-label">Victorias</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">0</div>
+                            <div class="stat-label">Derrotas</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">2</div>
+                            <div class="stat-label">Títulos UFC</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">11</div>
+                            <div class="stat-label">Victorias Defensa</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="record">
+            <h2>Peleas Destacadas</h2>
+            <div class="fights">
+                <div class="fight-card">
+                    <h3>vs. Conor McGregor</h3>
+                    <div class="fight-date">UFC 229 - 6 de octubre de 2018</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Khabib derrotó a Conor McGregor por sumisión (RNC) en el segundo round en el T-Mobile Arena de Las Vegas. Esta fue una de las peleas más esperadas del UFC.</p>
+                </div>
+
+                <div class="fight-card">
+                    <h3>vs. Dustin Poirier</h3>
+                    <div class="fight-date">UFC 242 - 7 de septiembre de 2019</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Defensa exitosa del título mundial. Khabib ganó por decisión unánime en el Yas Island de Abu Dhabi.</p>
+                </div>
+
+                <div class="fight-card">
+                    <h3>vs. Justin Gaethje</h3>
+                    <div class="fight-date">UFC 254 - 24 de octubre de 2020</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Última pelea de Khabib en su carrera. Ganó por KO técnico en el segundo round, tras lo cual se retiró.</p>
+                </div>
+
+                <div class="fight-card">
+                    <h3>vs. Dominance Alcântara</h3>
+                    <div class="fight-date">Debut - 30 de enero de 2009</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Khabib inició su carrera profesional con una victoria por sumisión. Comenzó su legado desde el inicio.</p>
+                </div>
+
+                <div class="fight-card">
+                    <h3>vs. Eddie Alvarez</h3>
+                    <div class="fight-date">UFC 205 - 12 de noviembre de 2016</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Khabib ganó por decisión unánime en su pelea más importante hasta ese momento en MSG.</p>
+                </div>
+
+                <div class="fight-card">
+                    <h3>vs. Rafael dos Anjos</h3>
+                    <div class="fight-date">UFC 223 - 7 de abril de 2018</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Derrotó a Rafael dos Anjos por decisión unánime, consolidando su lugar como contendiente al título.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements">
+            <h2>Logros y Reconocimientos</h2>
+            <div class="achievements">
+                <div class="achievement">
+                    <h3>🏆 Campeón del UFC</h3>
+                    <p>Ganó el título de Campeón de Peso Ligero del UFC en 2018</p>
+                </div>
+
+                <div class="achievement">
+                    <h3>🥇 Defensa del Título</h3>
+                    <p>11 defensas exitosas del título mundial, una de las más altas en la historia del UFC</p>
+                </div>
+
+                <div class="achievement">
+                    <h3>🎯 Récord Perfecto</h3>
+                    <p>Se retiró invicto con 29 victorias y 0 derrotas, uno de los pocos en lograrlo</p>
+                </div>
+
+                <div class="achievement">
+                    <h3>⭐ Leyenda del UFC</h3>
+                    <p>Reconocido como uno de los mejores peleadores de artes marciales mixtas de todos los tiempos</p>
+                </div>
+
+                <div class="achievement">
+                    <h3>🌍 Impacto Global</h3>
+                    <p>Llevó el MMA a nuevos niveles de popularidad especialmente en Rusia y el Cáucaso</p>
+                </div>
+
+                <div class="achievement">
+                    <h3>🦅 El Águila</h3>
+                    <p>Su dominio técnico y control en el octógono lo hicieron merecedor del apodo "The Eagle"</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <h2>Galería</h2>
+            <div class="gallery">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Khabib_Nurmagomedov_2018.jpg" alt="Khabib en acción" class="gallery-img">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Khabib_Nurmagomedov_2019_by_Glenn_Francis.jpg" alt="Celebración de victoria" class="gallery-img">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/Khabib_Nurmagomedov_2020_UFC_254.jpg" alt="Khabib en el octógono" class="gallery-img">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Khabib_Nurmagomedov_at_UFC_229.jpg" alt="Postura de combate" class="gallery-img">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Khabib_and_Karim_Zidane.jpg" alt="Técnica de defensa" class="gallery-img">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Khabib_Nurmagomedov_2017.jpg/400px-Khabib_Nurmagomedov_2017.jpg" alt="Momento de gloria" class="gallery-img">
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Khabib Nurmagomedov - The Eagle. Página creada con fines educativos.</p>
+        <p style="color: #ff0000;">🦅 "Alhamdulillah for everything" - Khabib Nurmagomedov</p>
+    </footer>
+</body>
+</html>
