@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Entrenamiento - Khabib Nurmagomedov</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>.hero{min-height:220px;padding:70px 20px}</style>
+</head>
+<body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <header>
+        <nav>
+            <div class="logo">🦅 KHABIB</div>
+            <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">☰</button>
+            <ul id="main-nav" role="navigation">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="about.html">Biografía</a></li>
+                <li><a href="fights.html">Peleas</a></li>
+                <li><a href="media.html">Medios</a></li>
+                <li><a href="training.html">Entrenamiento</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Entrenamiento y metodología</h1>
+        <p class="muted">Cómo se preparaba 'The Eagle'</p>
+    </section>
+
+    <main id="main" class="container">
+        <section>
+            <h2>Principios de entrenamiento</h2>
+            <ul style="margin-left:18px;">
+                <li>Enfoque en resistencia y acondicionamiento general.</li>
+                <li>Trabajo técnico diario en wrestling y sambo.</li>
+                <li>Sparring controlado orientado a la transición de posiciones.</li>
+                <li>Recuperación, respiración y disciplina nutricional.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejemplo de semana de entrenamiento</h2>
+            <ol style="max-width: 800px; margin: 0 auto; padding-left: 18px;">
+                <li>Lunes: técnica de lucha y rounds de grappling.</li>
+                <li>Martes: acondicionamiento y trabajo de explosividad.</li>
+                <li>Miércoles: sparring ligero y análisis de vídeo.</li>
+                <li>Jueves: sesiones de fuerza y transiciones al suelo.</li>
+                <li>Viernes: simulación de pelea y ajustes tácticos.</li>
+                <li>Sábado: trabajo técnico y recuperación activa.</li>
+                <li>Domingo: descanso y seguimiento médico/recuperación.</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Consejos para practicantes</h2>
+            <p>Mantén constancia, prioriza la técnica antes del poder, y trabaja tu cardio con sesiones específicas de alta intensidad.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Página educativa sobre Khabib</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        if (menuToggle) menuToggle.addEventListener('click', () => {
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!expanded));
+            mainNav.setAttribute('aria-hidden', String(expanded));
+            mainNav.style.display = expanded ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

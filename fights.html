@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Peleas - Khabib Nurmagomedov</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>.hero{min-height:220px;padding:70px 20px}</style>
+</head>
+<body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <header>
+        <nav>
+            <div class="logo">🦅 KHABIB</div>
+            <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">☰</button>
+            <ul id="main-nav" role="navigation">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="about.html">Biografía</a></li>
+                <li><a href="fights.html">Peleas</a></li>
+                <li><a href="media.html">Medios</a></li>
+                <li><a href="training.html">Entrenamiento</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Peleas destacadas</h1>
+        <p class="muted">Registro y análisis de combates</p>
+    </section>
+
+    <main id="main" class="container">
+        <section>
+            <h2>Registro profesional completo (resumen)</h2>
+            <p>Khabib se retiró con un récord profesional de 29-0. Aquí listamos muchos de sus combates más relevantes, su resultado y un breve comentario.</p>
+        </section>
+
+        <section>
+            <h2>Listado de combates seleccionados</h2>
+            <div class="fights">
+                <div class="fight-card">
+                    <h3>vs. Conor McGregor</h3>
+                    <div class="fight-date">UFC 229 - 6 de octubre de 2018</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Control total y sumisión en el cuarto asalto. Combate con gran trascendencia mediática.</p>
+                </div>
+                <div class="fight-card">
+                    <h3>vs. Dustin Poirier</h3>
+                    <div class="fight-date">UFC 242 - 7 de septiembre de 2019</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Ganar por decisión ante un rival táctico en Abu Dhabi.</p>
+                </div>
+                <div class="fight-card">
+                    <h3>vs. Justin Gaethje</h3>
+                    <div class="fight-date">UFC 254 - 24 de octubre de 2020</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Final por TKO en el segundo asalto; anunció su retiro tras el combate.</p>
+                </div>
+                <div class="fight-card">
+                    <h3>vs. Eddie Alvarez</h3>
+                    <div class="fight-date">UFC 205 - 12 de noviembre de 2016</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Victoria clave en Madison Square Garden.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Análisis rápido (táctico)</h2>
+            <p>Se puede destacar cómo Khabib priorizaba el control posicional, la transición a posiciones dominantes y la conservación de energía para cerrar peleas en rounds medios y tardíos. Su defensa de derribos también era robusta, dificultando que los rivales mantuvieran su propio juego.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Página educativa sobre Khabib</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        if (menuToggle) menuToggle.addEventListener('click', () => {
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!expanded));
+            mainNav.setAttribute('aria-hidden', String(expanded));
+            mainNav.style.display = expanded ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

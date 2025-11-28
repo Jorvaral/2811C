@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Medios - Khabib Nurmagomedov</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>.hero{min-height:220px;padding:70px 20px}</style>
+</head>
+<body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <header>
+        <nav>
+            <div class="logo">🦅 KHABIB</div>
+            <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">☰</button>
+            <ul id="main-nav" role="navigation">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="about.html">Biografía</a></li>
+                <li><a href="fights.html">Peleas</a></li>
+                <li><a href="media.html">Medios</a></li>
+                <li><a href="training.html">Entrenamiento</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Medios y Galería</h1>
+        <p class="muted">Fotos, highlights y recursos multimedia</p>
+    </section>
+
+    <main id="main" class="container">
+        <section>
+            <h2>Galería</h2>
+            <div class="gallery-grid">
+                <img src="images/khabib2.jpg" alt="Khabib en competición" class="lightbox-trigger" loading="lazy">
+                <img src="images/khabib3.jpg" alt="Khabib entrenando" class="lightbox-trigger" loading="lazy">
+                <img src="images/khabib4.jpg" alt="Khabib con su familia" class="lightbox-trigger" loading="lazy">
+                <img src="images/khabib1.jpg" alt="Khabib en UFC" class="lightbox-trigger" loading="lazy">
+            </div>
+        </section>
+
+        <section>
+            <h2>Vídeos y highlights</h2>
+            <p>Si algún vídeo está bloqueado para embed (error 153), usa los enlaces para abrir directamente en YouTube.</p>
+            <div class="video-wrapper" style="margin-top:14px;">
+                <a class="video-preview" href="https://www.youtube.com/watch?v=xdQE6PrbSC4" target="_blank" rel="noopener">
+                    <img src="https://img.youtube.com/vi/xdQE6PrbSC4/maxresdefault.jpg" alt="Miniatura Khabib vs McGregor" loading="lazy">
+                    <div class="play-btn" aria-hidden="true"></div>
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <h2>Recursos</h2>
+            <p>Enlaces a bancos de imágenes y clips para uso informativo:</p>
+            <ul style="margin-left:18px;">
+                <li><a href="https://www.gettyimages.com" target="_blank" rel="noopener">Getty Images</a></li>
+                <li><a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Página educativa sobre Khabib</p>
+    </footer>
+    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Visor de imágenes" tabindex="-1">
+        <div class="controls">
+            <button id="prevBtn" aria-label="Imagen anterior">‹</button>
+            <button id="nextBtn" aria-label="Siguiente imagen">›</button>
+        </div>
+        <button id="closeBtn" class="lb-close" aria-label="Cerrar visor">×</button>
+        <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <script>
+        // Mobile menu (shared)
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        if (menuToggle) menuToggle.addEventListener('click', () => {
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!expanded));
+            if (mainNav) mainNav.setAttribute('aria-hidden', String(expanded));
+            if (mainNav) mainNav.style.display = expanded ? 'none' : 'flex';
+        });
+
+        // Lightbox (media page)
+        (function () {
+            const imgs = Array.from(document.querySelectorAll('.lightbox-trigger'));
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const closeBtn = document.getElementById('closeBtn');
+            if (!imgs.length || !lightbox) return;
+            let currentIndex = 0;
+
+            function openLightbox(index) {
+                currentIndex = index;
+                lightboxImg.src = imgs[currentIndex].src;
+                lightboxImg.alt = imgs[currentIndex].alt || '';
+                lightbox.classList.add('show');
+                lightbox.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeLightbox() {
+                lightbox.classList.remove('show');
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+            function showNext() { currentIndex = (currentIndex + 1) % imgs.length; openLightbox(currentIndex); }
+            function showPrev() { currentIndex = (currentIndex - 1 + imgs.length) % imgs.length; openLightbox(currentIndex); }
+
+            imgs.forEach((img, i) => {
+                img.setAttribute('tabindex', '0');
+                img.addEventListener('click', () => openLightbox(i));
+                img.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') openLightbox(i); });
+            });
+
+            if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+            if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+            if (closeBtn) closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+            if (lightbox) lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.classList.contains('show')) {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowRight') showNext();
+                    if (e.key === 'ArrowLeft') showPrev();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Biografía - Khabib Nurmagomedov</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style> .hero { padding: 80px 20px; min-height: 260px; }</style>
+</head>
+<body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <header>
+        <nav>
+            <div class="logo">🦅 KHABIB</div>
+            <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">☰</button>
+            <ul id="main-nav" role="navigation">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="about.html">Biografía</a></li>
+                <li><a href="fights.html">Peleas</a></li>
+                <li><a href="media.html">Medios</a></li>
+                <li><a href="training.html">Entrenamiento</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" style="background-position: center top;">
+        <h1>Biografía detallada</h1>
+        <p class="muted">Trayectoria, familia y legado</p>
+    </section>
+
+    <main id="main" class="container">
+        <section>
+            <h2>Infancia y raíces</h2>
+            <p>Khabib Abdulmagomedovich Nurmagomedov nació el 20 de septiembre de 1988 en Sildi, Daguestán, dentro de una familia con fuerte tradición en la lucha. Su padre, Abdulmanap Nurmagomedov, fue su primer entrenador y mentor, y jugó un papel fundamental en su formación deportiva y personal.</p>
+            <p>Desde niño entrenó lucha y sambo en condiciones duras, lo que forjó su ética de trabajo y disciplina. La comunidad del Cáucaso y la cultura de lucha de la región marcaron su estilo: resistencia, técnica y control.</p>
+        </section>
+
+        <section>
+            <h2>Carrera temprana</h2>
+            <p>Comenzó su carrera profesional en 2008 compitiendo en eventos regionales. Su dominio en el suelo y su capacidad para imponer ritmo le permitieron ascender rápidamente hacia organizaciones internacionales, hasta firmar con el UFC, donde consolidó su leyenda.</p>
+        </section>
+
+        <section>
+            <h2>Vida fuera del octágono</h2>
+            <p>Khabib es conocido por su apego a la familia y la fe. Tras retirarse, se dedicó a labores de formación, promoción del deporte en su región y labores de mentor para nuevos talentos. Mantiene una influencia destacada en la comunidad de MMA.</p>
+        </section>
+
+        <section>
+            <h2>Referencias y lecturas</h2>
+            <ul style="margin-left:18px;">
+                <li><a href="https://en.wikipedia.org/wiki/Khabib_Nurmagomedov" target="_blank" rel="noopener">Wikipedia - Khabib Nurmagomedov</a></li>
+                <li><a href="https://www.ufc.com/athlete/khabib-nurmagomedov" target="_blank" rel="noopener">Ficha en UFC</a></li>
+                <li><a href="https://www.youtube.com/results?search_query=khabib+highlights" target="_blank" rel="noopener">Vídeos y highlights</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Página educativa sobre Khabib</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        if (menuToggle) menuToggle.addEventListener('click', () => {
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!expanded));
+            mainNav.setAttribute('aria-hidden', String(expanded));
+            mainNav.style.display = expanded ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>
