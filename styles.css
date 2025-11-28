@@ -58,7 +58,7 @@ nav ul[aria-hidden="true"] { display: none; }
     position: relative;
     background: url('images/khabib2.jpg') center/cover no-repeat;
     color: white;
-    padding: 120px 20px;
+    padding: 110px 20px;
     text-align: center;
     min-height: 520px;
     display: flex;
@@ -70,13 +70,13 @@ nav ul[aria-hidden="true"] { display: none; }
 .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,12,16,0.35) 0%, rgba(10,20,30,0.75) 65%); }
 .hero > * { position: relative; z-index: 2; }
 .hero h1 {
-    font-size: 56px;
+    font-size: 48px;
     margin-bottom: 6px;
     line-height: 1.02;
-    letter-spacing: 1px;
+    letter-spacing: 0.6px;
 }
 .hero p {
-    font-size: 24px;
+    font-size: 18px;
     color: var(--accent-red);
 }
 
@@ -96,6 +96,34 @@ nav ul[aria-hidden="true"] { display: none; }
     border: 1px solid rgba(255,255,255,0.06);
 }
 .cta-button:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 18px 40px rgba(26,111,179,0.14); }
+
+/* Cards */
+.card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: 12px;
+    padding: 18px;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.card:hover { transform: translateY(-6px); box-shadow: 0 18px 60px rgba(2,6,23,0.75); }
+
+/* Stats badges */
+.stats { display:flex; gap:14px; flex-wrap:wrap; }
+.stat-box { flex:1 1 140px; }
+
+/* Gallery improvements */
+.gallery-grid img { height: 140px; }
+
+/* Fight-card enhancements */
+.fight-card { padding:16px; }
+.fight-card h3 { font-size:18px; margin-bottom:8px; }
+
+/* Small responsive tweaks */
+@media (max-width: 900px) {
+    .hero { padding: 80px 18px; }
+    .hero h1 { font-size: 36px; }
+}
 
 /* ACCESSIBILITY */
 .skip-link { position: absolute; top: -40px; left: 8px; background: #000; color: #fff; padding: 8px 12px; z-index: 2000; border-radius: 4px; }
