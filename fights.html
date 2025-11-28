@@ -36,30 +36,116 @@
 
         <section>
             <h2>Listado de combates seleccionados</h2>
-            <div class="fights">
-                <div class="fight-card">
-                    <h3>vs. Conor McGregor</h3>
-                    <div class="fight-date">UFC 229 - 6 de octubre de 2018</div>
-                    <span class="result win">VICTORIA</span>
-                    <p>Control total y sumisión en el cuarto asalto. Combate con gran trascendencia mediática.</p>
-                </div>
-                <div class="fight-card">
-                    <h3>vs. Dustin Poirier</h3>
-                    <div class="fight-date">UFC 242 - 7 de septiembre de 2019</div>
-                    <span class="result win">VICTORIA</span>
-                    <p>Ganar por decisión ante un rival táctico en Abu Dhabi.</p>
-                </div>
-                <div class="fight-card">
-                    <h3>vs. Justin Gaethje</h3>
+            <div class="filter-bar card" style="margin-bottom:18px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                <label class="muted">Buscar:</label>
+                <input id="fightSearch" type="search" placeholder="Buscar por rival (ej. McGregor)" style="padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--text-light);">
+                <label class="muted">Año:</label>
+                <select id="fightYear" style="padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--text-light);">
+                    <option value="all">Todos</option>
+                    <option>2020</option>
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+                    <option>2016</option>
+                    <option>2014</option>
+                    <option>2013</option>
+                    <option>2012</option>
+                    <option>2011</option>
+                    <option>2010</option>
+                    <option>2009</option>
+                    <option>2008</option>
+                </select>
+                <label class="muted">Resultado:</label>
+                <select id="fightResult" style="padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--text-light);">
+                    <option value="all">Todos</option>
+                    <option value="win">Victoria</option>
+                </select>
+            </div>
+
+            <div id="fightList" class="fights">
+                <div class="fight-card reveal" data-year="2020" data-result="win">
+                    <h3>Justin Gaethje</h3>
                     <div class="fight-date">UFC 254 - 24 de octubre de 2020</div>
                     <span class="result win">VICTORIA</span>
-                    <p>Final por TKO en el segundo asalto; anunció su retiro tras el combate.</p>
+                    <p>Triángulo desde la guardia (technical submission). Última pelea y anuncio de retiro.</p>
                 </div>
-                <div class="fight-card">
-                    <h3>vs. Eddie Alvarez</h3>
+                <div class="fight-card reveal" data-year="2019" data-result="win">
+                    <h3>Dustin Poirier</h3>
+                    <div class="fight-date">UFC 242 - 7 de septiembre de 2019</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Sumisión por rear-naked choke en el tercer asalto; unificó títulos.</p>
+                </div>
+                <div class="fight-card reveal" data-year="2018" data-result="win">
+                    <h3>Conor McGregor</h3>
+                    <div class="fight-date">UFC 229 - 6 de octubre de 2018</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Sumisión en el cuarto asalto tras controlar la pelea con takedowns y presión.</p>
+                </div>
+                <div class="fight-card reveal" data-year="2018" data-result="win">
+                    <h3>Al Iaquinta</h3>
+                    <div class="fight-date">UFC 223 - 7 de abril de 2018</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Decisión unánime: ganó el título ligero vacante.</p>
+                </div>
+                <div class="fight-card reveal" data-year="2017" data-result="win">
+                    <h3>Edson Barboza</h3>
+                    <div class="fight-date">UFC 219 - 30 de diciembre de 2017</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Dominio con takedowns repetidos; ganó por decisión unánime.</p>
+                </div>
+                <div class="fight-card reveal" data-year="2016" data-result="win">
+                    <h3>Michael Johnson</h3>
                     <div class="fight-date">UFC 205 - 12 de noviembre de 2016</div>
                     <span class="result win">VICTORIA</span>
-                    <p>Victoria clave en Madison Square Garden.</p>
+                    <p>Sumisión por kimura en el tercer asalto.</p>
+                </div>
+                <div class="fight-card reveal" data-year="2016" data-result="win">
+                    <h3>Darrell Horcher</h3>
+                    <div class="fight-date">UFC on Fox - 16 de abril de 2016</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Terminó por TKO en el segundo asalto.</p>
+                </div>
+                <div class="fight-card reveal" data-year="2014" data-result="win">
+                    <h3>Rafael dos Anjos</h3>
+                    <div class="fight-date">UFC on Fox 11 - 19 de abril de 2014</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Decisión unánime ante un ex-campeón.</p>
+                </div>
+                <div class="fight-card reveal" data-year="2013" data-result="win">
+                    <h3>Pat Healy</h3>
+                    <div class="fight-date">UFC 165 - 21 de septiembre de 2013</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Decisión unánime; control posicional durante todo el combate.</p>
+                </div>
+                <div class="fight-card reveal" data-year="2013" data-result="win">
+                    <h3>Abel Trujillo</h3>
+                    <div class="fight-date">UFC 160 - 25 de mayo de 2013</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Decisión unánime; estableció récord de takedowns en un solo combate.</p>
+                </div>
+                <div class="fight-card reveal" data-year="2013" data-result="win">
+                    <h3>Thiago Tavares</h3>
+                    <div class="fight-date">UFC on FX 7 - 19 de enero de 2013</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>KO técnico en el primer asalto.</p>
+                </div>
+                <div class="fight-card reveal" data-year="2012" data-result="win">
+                    <h3>Gleison Tibau</h3>
+                    <div class="fight-date">UFC 148 - 7 de julio de 2012</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Decisión unánime en Las Vegas.</p>
+                </div>
+                <div class="fight-card reveal" data-year="2012" data-result="win">
+                    <h3>Kamal Shalorus</h3>
+                    <div class="fight-date">UFC on FX 1 - 20 de enero de 2012</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Debut en UFC: sumisión por rear-naked choke en el tercer asalto.</p>
+                </div>
+                <div class="fight-card reveal" data-year="2009" data-result="win">
+                    <h3>Shahbulat Shamhalaev</h3>
+                    <div class="fight-date">M-1 Challenge - 3 de noviembre de 2009</div>
+                    <span class="result win">VICTORIA</span>
+                    <p>Finalizó por armbar en circuito regional (M-1).</p>
                 </div>
             </div>
         </section>

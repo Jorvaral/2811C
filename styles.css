@@ -259,13 +259,22 @@ h2 {
 .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; display: block; }
 .video-preview { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
 .video-preview img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 8px; }
-.video-preview .play-btn {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none;
+
+/* Video card (no thumbnail) - neutral placeholder with play icon */
+.video-card {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    border-radius: 8px; color: white; text-align: center;
+    background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(10,12,20,0.7));
 }
-.video-preview .play-btn::before {
-    content: '▶';
-    font-size: 56px; color: rgba(255,255,255,0.95); background: rgba(0,0,0,0.45); padding: 18px 22px; border-radius: 999px; box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+.video-card .play-icon {
+    font-size: 64px; line-height: 1; padding: 20px 24px; border-radius: 999px;
+    background: rgba(255,255,255,0.06); box-shadow: 0 10px 36px rgba(2,6,23,0.6);
 }
+.video-card:hover { transform: translateY(-4px) scale(1.01); }
+
+/* Reveal animation: elements with .reveal will fade+slide into view */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity 500ms ease-out, transform 500ms cubic-bezier(.2,.9,.2,1); will-change: opacity, transform; }
+.reveal.show { opacity: 1; transform: translateY(0); }
 
 /* FOOTER */
 footer {

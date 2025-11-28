@@ -94,6 +94,74 @@
     }
 
     // Init on DOMContentLoaded
-    document.addEventListener('DOMContentLoaded', () => initLightbox());
+    document.addEventListener('DOMContentLoaded', () => {
+        initLightbox();
+        initReveal();
+    });
+
+    // Reveal on scroll using IntersectionObserver
+    function initReveal() {
+        if (!('IntersectionObserver' in window)) return;
+        const items = Array.from(document.querySelectorAll('.reveal'));
+        if (!items.length) return;
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        items.forEach(i => io.observe(i));
+    }
+
+    // Fights filter: if the fights page contains controls, wire them
+    function initFightsFilter() {
+        const fightList = document.getElementById('fightList');
+        if (!fightList) return;
+        const cards = Array.from(fightList.querySelectorAll('.fight-card'));
+        const search = document.getElementById('fightSearch');
+        const yearSel = document.getElementById('fightYear');
+        const resultSel = document.getElementById('fightResult');
+
+        function matches(card) {
+            const q = search && search.value.trim().toLowerCase();
+            const year = yearSel && yearSel.value;
+            const result = resultSel && resultSel.value;
+            const title = (card.querySelector('h3')?.textContent || '').toLowerCase();
+            if (q) {
+                if (!title.includes(q)) return false;
+            }
+            if (year && year !== 'all') {
+                if (card.dataset.year !== year) return false;
+            }
+            if (result && result !== 'all') {
+                if (card.dataset.result !== result) return false;
+            }
+            return true;
+        }
+
+        function applyFilter() {
+            cards.forEach(c => {
+                if (matches(c)) {
+                    c.style.display = '';
+                    // re-trigger reveal if not shown yet
+                    if (c.classList.contains('reveal') && !c.classList.contains('show')) {
+                        // small timeout to allow layout
+                        setTimeout(() => c.classList.add('show'), 60);
+                    }
+                } else {
+                    c.style.display = 'none';
+                }
+            });
+        }
+
+        if (search) search.addEventListener('input', applyFilter);
+        if (yearSel) yearSel.addEventListener('change', applyFilter);
+        if (resultSel) resultSel.addEventListener('change', applyFilter);
+
+        // initial apply
+        applyFilter();
+    }
 
 })();
