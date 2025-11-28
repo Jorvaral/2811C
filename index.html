@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khabib Nurmagomedov - The Eagle</title>
+    <meta name="description" content="Página dedicada a Khabib Nurmagomedov: biografía, récord, peleas destacadas y galería de imágenes." />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -61,8 +63,8 @@
         }
 
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('images/khabib1.svg') center/cover;
+            background: linear-gradient(135deg, #000000 0%, #1a3a52 100%), url('images/khabib1.jpg') center/cover;
+            background-size: cover;
             color: white;
             padding: 150px 20px;
             text-align: center;
@@ -79,6 +81,51 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
             animation: slideDown 0.8s ease;
         }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 12px 22px;
+            background: #ff0000;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 6px 18px rgba(255,0,0,0.15);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(255,0,0,0.22); }
+
+        /* Mobile nav */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.12);
+            color: white;
+            padding: 8px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        nav ul[aria-hidden="true"] { display: none; }
+
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; }
+        .video-wrapper iframe { position: absolute; top:0; left:0; width:100%; height:100%; border:0; }
+
+        /* Skip link for keyboard users */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 8px;
+            background: #000;
+            color: #fff;
+            padding: 8px 12px;
+            z-index: 2000;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .skip-link:focus { top: 8px; }
 
         .hero p {
             font-size: 24px;
@@ -251,24 +298,78 @@
             opacity: 0.9;
         }
 
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
+        /* Imágenes distribuidas */
+        .inline-figure {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            margin: 18px 0;
+            flex-wrap: wrap;
         }
 
-        .gallery-img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
+        .inline-figure img {
+            width: 320px;
+            max-width: 100%;
+            height: auto;
             border-radius: 8px;
-            transition: transform 0.3s ease;
-            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
-        .gallery-img:hover {
-            transform: scale(1.05);
+        .inline-figure figcaption { font-size: 14px; color: #666; max-width: 560px; }
+
+        /* Galería distribuida: los disparadores usan la clase .lightbox-trigger */
+        .gallery { display: none; }
+        .lightbox-trigger { cursor: pointer; border-radius: 8px; transition: transform 0.2s ease; }
+        .lightbox-trigger:hover { transform: scale(1.02); }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
         }
+
+        .lightbox.show { display: flex; }
+
+        .lightbox img {
+            max-width: 95%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        }
+
+        .lightbox .controls { position: absolute; inset: 0; display:flex; align-items:center; justify-content:space-between; pointer-events:none }
+        .lightbox button { background: rgba(0,0,0,0.5); color:white; border:0; font-size:22px; padding:10px 14px; border-radius:6px; pointer-events:auto }
+
+        /* Back to top */
+        .top-btn {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            background: #1a3a52;
+            color: white;
+            border: none;
+            padding: 12px 14px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 999;
+        }
+
+        .socials {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .socials a { color: white; text-decoration: none; font-weight: 600; background: #111; padding: 8px 12px; border-radius: 6px; }
 
         footer {
             background: #1a1a1a;
@@ -299,14 +400,16 @@
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
     <header>
         <nav>
             <div class="logo">🦅 KHABIB</div>
-            <ul>
+            <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">☰</button>
+            <ul id="main-nav" role="navigation">
                 <li><a href="#about">Acerca de</a></li>
                 <li><a href="#record">Récord</a></li>
                 <li><a href="#achievements">Logros</a></li>
-                <li><a href="#gallery">Galería</a></li>
+                <li><a href="#timeline">Cronología</a></li>
             </ul>
         </nav>
     </header>
@@ -314,27 +417,33 @@
     <section class="hero">
         <h1>KHABIB NURMAGOMEDOV</h1>
         <p>"The Eagle" - Leyenda del UFC</p>
+        <a href="#video" class="cta-button">Ver vídeo</a>
     </section>
 
-    <div class="container">
+    <div id="main-content" class="container">
         <section id="about">
             <h2>Acerca de Khabib</h2>
             <div class="about-grid">
                 <div class="about-text">
                     <p>
-                        Khabib Abdulmagomedovich Nurmagomedov es un luchador ruso de artes marciales mixtas (MMA), 
-                        nacido el 20 de septiembre de 1988 en Makhachkala, Daguestán, Rusia. Es considerado uno de 
-                        los mejores peleadores de todos los tiempos y una leyenda del UFC.
+                        Khabib Abdulmagomedovich Nurmagomedov (n. 20 de septiembre de 1988) es un exluchador profesional de artes marciales mixtas (MMA) originario de Makhachkala, Daguestán, Rusia. Comenzó a entrenar lucha a muy temprana edad bajo la guía de su padre, Abdulmanap Nurmagomedov, quien fue medallista y reconocido entrenador de lucha en la región.
                     </p>
+
                     <p>
-                        Criado en un ambiente de lucha desde temprana edad, Khabib fue entrenado por su padre Abdulmanap 
-                        Nurmagomedov, quien fue su mentor principal hasta su fallecimiento en 2020. Su dedicación y disciplina 
-                        lo llevaron a convertirse en campeón del UFC en la división de peso ligero.
+                        Tras una destacada etapa amateur, Khabib debutó como profesional y se caracterizó por un estilo dominante fundamentado en el wrestling y el sambo. Sus peleas se distinguen por una presión constante, agarres eficaces y control posicional que terminaban con sumisiones o acabados por ground-and-pound.
                     </p>
+
                     <p>
-                        El apodo "The Eagle" (El Águila) se debe a su capacidad para controlar a sus oponentes desde posiciones 
-                        de superioridad y su dominancia en todas las áreas del combate. Se retiró de la competencia en 2020 
-                        con un récord perfecto.
+                        A lo largo de su carrera ganó reconocimiento mundial en el UFC, donde se convirtió en campeón indiscutible de la división de peso ligero. Tras defender su título en ocasiones clave, se retiró en 2020 con un récord profesional inmaculado: 29 victorias y 0 derrotas. Su legado incluye no solo resultados, sino influencia en la técnica y entrenamiento de las nuevas generaciones.
+                    </p>
+
+                    <figure class="inline-figure">
+                        <img src="images/khabib2.jpg" alt="Khabib en acción" class="lightbox-trigger" loading="lazy" decoding="async">
+                        <figcaption>Imagen de Khabib en una competición importante. Haz clic para ampliar.</figcaption>
+                    </figure>
+
+                    <p>
+                        Además de su carrera deportiva, Khabib es conocido por su disciplina, su apego a la familia y su papel como mentor. Tras retirarse ha fundado proyectos deportivos y academias para impulsar el talento en Daguestán y otras regiones.
                     </p>
                 </div>
                 <div>
@@ -348,15 +457,60 @@
                             <div class="stat-label">Derrotas</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-number">2</div>
-                            <div class="stat-label">Títulos UFC</div>
+                            <div class="stat-number">1</div>
+                            <div class="stat-label">Campeonato UFC (Peso Ligero)</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-number">11</div>
-                            <div class="stat-label">Victorias Defensa</div>
+                            <div class="stat-number">11+</div>
+                            <div class="stat-label">Defensas y combates vs Top</div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="biografia">
+            <h2>Biografía ampliada</h2>
+            <div class="about-text">
+                <p><strong>Infancia y formación:</strong> Khabib Abdulmagomedovich Nurmagomedov nació el 20 de septiembre de 1988 en Makhachkala, Daguestán (Rusia). Creció en una familia dedicada a las artes marciales; su padre, Abdulmanap Nurmagomedov, fue su entrenador y la figura central en su formación desde la infancia. Khabib comenzó a entrenar lucha libre, sambo y judo a una edad temprana, lo que cimentó su base para el éxito en las MMA.</p>
+
+                <p><strong>Carrera amateur y profesional temprana:</strong> Khabib tuvo una exitosa etapa amateur antes de dar el salto a profesional. Compitió en varias organizaciones pequeñas y regionales, desarrollando su estilo de control y grappling que más tarde lo caracterizaría en el octágono del UFC.</p>
+
+                <p><strong>Carrera en UFC y legado:</strong> Debutó en el UFC y fue ascendiendo hasta convertirse en campeón de peso ligero. Destacan sus victorias por control dominante y sumisiones sobre rivales de alto nivel. Se retiró en 2020 con un récord profesional perfecto (29-0), lo que le asegura un lugar entre los grandes de las artes marciales mixtas.</p>
+            </div>
+        </section>
+
+        <section id="estilo-entrenamiento">
+            <h2>Estilo de lucha y entrenamiento</h2>
+            <div class="about-text">
+                <p><strong>Estilo:</strong> Khabib es conocido por su wrestling y sambo de clase mundial. Su estrategia se basa en llevar la pelea al suelo, mantener una presión constante, pasar la guardia y buscar sumisiones o ground-and-pound. Su control posicional y resistencia lo hacen extremadamente difícil de derrotar. Técnicamente, destaca por:
+                <ul>
+                    <li>Entrada a takedown desde clinch y golpes.</li>
+                    <li>Transiciones rápidas de control (mount, side control, back control).</li>
+                    <li>Uso eficiente del peso corporal para neutralizar a oponentes más explosivos.</li>
+                </ul>
+                </p>
+
+                <p><strong>Rutina y equipo:</strong> Durante su carrera se entrenó bajo la supervisión de su padre y con un equipo de luchadores del Cáucaso. Sus sesiones combinaban acondicionamiento físico, técnicas de lucha y sparring intenso. Su entrenamiento típico incluía trabajo de resistencia, rounds de grappling, técnica de sumisiones y sesiones específicas para mejorar la respiración y la recuperación. Tras el fallecimiento de su padre en 2020, Khabib se ha centrado en ser mentor, abriendo gimnasios y apoyando a la nueva generación de peleadores.</p>
+
+                <figure class="inline-figure">
+                    <img src="images/khabib3.jpg" alt="Khabib entrenamiento" class="lightbox-trigger" loading="lazy" decoding="async">
+                    <figcaption>Sesión de entrenamiento: fuerza, grappling y acondicionamiento en rutina habitual.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="vida-personal">
+            <h2>Vida personal</h2>
+            <div class="about-text">
+                <p>Khabib es practicante musulmán devoto y ha hablado en numerosas ocasiones sobre la importancia de la familia y la fe en su vida. Está casado y es padre; tras su retiro se ha centrado en la familia, en la promoción de talentos jóvenes y en proyectos relacionados con deportes y formación en MMA en su región.</p>
+
+                <p><strong>Actividades fuera del octágono:</strong> Khabib invierte tiempo en su fundación deportiva, apoya eventos benéficos y participa en iniciativas educativas y deportivas en Daguestán. También ha aparecido como comentarista y analista en medios especializados y mantiene relaciones con marcas deportivas.</p>
+
+                <figure class="inline-figure">
+                    <img src="images/khabib4.jpg" alt="Khabib con su familia" class="lightbox-trigger" loading="lazy" decoding="async">
+                    <figcaption>Khabib en un acto público; la familia y la fe son pilares fundamentales en su vida.</figcaption>
+                </figure>
             </div>
         </section>
 
@@ -367,42 +521,32 @@
                     <h3>vs. Conor McGregor</h3>
                     <div class="fight-date">UFC 229 - 6 de octubre de 2018</div>
                     <span class="result win">VICTORIA</span>
-                    <p>Khabib derrotó a Conor McGregor por sumisión (RNC) en el segundo round en el T-Mobile Arena de Las Vegas. Esta fue una de las peleas más esperadas del UFC.</p>
+                    <p>Khabib y McGregor protagonizaron una de las peleas más mediáticas en la historia del UFC. Khabib impuso su dominio con takedowns constantes y control en el suelo, finalizando por sumisión (neck crank) en el cuarto asalto. El combate terminó con incidentes fuera del octágono que también marcaron la historia del evento.</p>
+                    <figure class="inline-figure">
+                        <img src="images/khabib1.jpg" alt="Khabib vs McGregor" class="lightbox-trigger" loading="lazy" decoding="async">
+                        <figcaption>Khabib aplicando control posicional durante UFC 229.</figcaption>
+                    </figure>
                 </div>
 
                 <div class="fight-card">
                     <h3>vs. Dustin Poirier</h3>
                     <div class="fight-date">UFC 242 - 7 de septiembre de 2019</div>
                     <span class="result win">VICTORIA</span>
-                    <p>Defensa exitosa del título mundial. Khabib ganó por decisión unánime en el Yas Island de Abu Dhabi.</p>
+                    <p>Defensa del título en Abu Dhabi: pelea táctica donde Khabib logró neutralizar los intentos de Poirier y mantener la iniciativa durante los rounds, ganando por decisión unánime en una actuación estratégica que demostró su evolución como campeón.</p>
                 </div>
 
                 <div class="fight-card">
                     <h3>vs. Justin Gaethje</h3>
                     <div class="fight-date">UFC 254 - 24 de octubre de 2020</div>
                     <span class="result win">VICTORIA</span>
-                    <p>Última pelea de Khabib en su carrera. Ganó por KO técnico en el segundo round, tras lo cual se retiró.</p>
-                </div>
-
-                <div class="fight-card">
-                    <h3>vs. Dominance Alcântara</h3>
-                    <div class="fight-date">Debut - 30 de enero de 2009</div>
-                    <span class="result win">VICTORIA</span>
-                    <p>Khabib inició su carrera profesional con una victoria por sumisión. Comenzó su legado desde el inicio.</p>
+                    <p>En una pelea altamente esperada, Khabib venció por TKO en el segundo asalto después de una intensa batalla. Tras este combate anunció su retiro, manteniendo su récord intacto.</p>
                 </div>
 
                 <div class="fight-card">
                     <h3>vs. Eddie Alvarez</h3>
                     <div class="fight-date">UFC 205 - 12 de noviembre de 2016</div>
                     <span class="result win">VICTORIA</span>
-                    <p>Khabib ganó por decisión unánime en su pelea más importante hasta ese momento en MSG.</p>
-                </div>
-
-                <div class="fight-card">
-                    <h3>vs. Rafael dos Anjos</h3>
-                    <div class="fight-date">UFC 223 - 7 de abril de 2018</div>
-                    <span class="result win">VICTORIA</span>
-                    <p>Derrotó a Rafael dos Anjos por decisión unánime, consolidando su lugar como contendiente al título.</p>
+                    <p>Victoria importante en Madison Square Garden que confirmó a Khabib como un contendiente serio al título gracias a su dominio en grappling y control de ritmo.</p>
                 </div>
             </div>
         </section>
@@ -412,7 +556,7 @@
             <div class="achievements">
                 <div class="achievement">
                     <h3>🏆 Campeón del UFC</h3>
-                    <p>Ganó el título de Campeón de Peso Ligero del UFC en 2018</p>
+                    <p>Ganó y defendió el título de Peso Ligero del UFC. Sus victorias clave entre 2016 y 2019 lo catapultaron a la cima de la división.</p>
                 </div>
 
                 <div class="achievement">
@@ -422,7 +566,7 @@
 
                 <div class="achievement">
                     <h3>🎯 Récord Perfecto</h3>
-                    <p>Se retiró invicto con 29 victorias y 0 derrotas, uno de los pocos en lograrlo</p>
+                    <p>Se retiró invicto con un récord profesional de 29-0, una hazaña única en las MMA modernas que refuerza su legado.</p>
                 </div>
 
                 <div class="achievement">
@@ -432,7 +576,7 @@
 
                 <div class="achievement">
                     <h3>🌍 Impacto Global</h3>
-                    <p>Llevó el MMA a nuevos niveles de popularidad especialmente en Rusia y el Cáucaso</p>
+                    <p>Su impacto trasciende los resultados: popularizó el MMA en Rusia, el Cáucaso y regiones musulmanas, inspirando a jóvenes luchadores y fomentando infraestructuras deportivas.</p>
                 </div>
 
                 <div class="achievement">
@@ -442,22 +586,156 @@
             </div>
         </section>
 
-        <section id="gallery">
-            <h2>Galería</h2>
-            <div class="gallery">
-                <img src="images/khabib1.svg" alt="Khabib en acción" class="gallery-img">
-                <img src="images/khabib2.svg" alt="Celebración de victoria" class="gallery-img">
-                <img src="images/khabib3.svg" alt="Khabib en el octógono" class="gallery-img">
-                <img src="images/khabib4.svg" alt="Postura de combate" class="gallery-img">
-                <img src="images/khabib5.svg" alt="Técnica de defensa" class="gallery-img">
-                <img src="images/khabib6.svg" alt="Momento de gloria" class="gallery-img">
+        <section id="faq">
+            <h2>Preguntas frecuentes (FAQ)</h2>
+            <div class="container">
+                <details style="margin-bottom:10px;"><summary><strong>¿Cuál es el récord profesional de Khabib?</strong></summary>
+                    <p>Se retiró con un récord profesional de 29 victorias y 0 derrotas (29-0).</p>
+                </details>
+
+                <details style="margin-bottom:10px;"><summary><strong>¿Cuándo ganó el título del UFC?</strong></summary>
+                    <p>Khabib se consagró campeón del peso ligero tras una trayectoria ascendente en UFC; su posición como campeón quedó consolidada tras victorias clave entre 2016 y 2018.</p>
+                </details>
+
+                <details style="margin-bottom:10px;"><summary><strong>¿Por qué se retiró?</strong></summary>
+                    <p>En 2020, después de la muerte de su padre y entrenador Abdulmanap, Khabib decidió retirarse manteniendo su promesa personal y priorizando la familia y su legado fuera del octágono.</p>
+                </details>
+
+                <details style="margin-bottom:10px;"><summary><strong>¿Qué tipo de luchador era?</strong></summary>
+                    <p>Era un luchador con base en wrestling y sambo, con gran control en el suelo y habilidad para finalizar combates por sumisión o dominio posicional.</p>
+                </details>
             </div>
         </section>
-    </div>
+
+        <section id="timeline">
+            <h2>Cronología</h2>
+            <div class="container">
+                <ol style="max-width:900px; margin:0 auto; padding-left:20px;">
+                    <li style="margin:14px 0;"><strong>2008–2012:</strong> Inicios profesionales y dominio en circuitos regionales.</li>
+                    <li style="margin:14px 0;"><strong>2013:</strong> Crecimiento internacional y primeras peleas de alto nivel.</li>
+                    <li style="margin:14px 0;"><strong>2016:</strong> Victoria sobre Eddie Alvarez y consolidación en la élite.</li>
+                    <li style="margin:14px 0;"><strong>2018:</strong> Grandes victorias, incluyendo Conor McGregor, y paso al título.</li>
+                    <li style="margin:14px 0;"><strong>2020:</strong> Última pelea (Justin Gaethje) y anuncio de retiro con récord 29-0.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="video">
+            <h2>Vídeo destacado: UFC 229 (Khabib vs McGregor)</h2>
+            <div class="container">
+                <p>Puedes ver aquí los highlights del combate. Si quieres que incruste un vídeo concreto, pásame el enlace de YouTube y lo pongo directamente.</p>
+                <div class="video-wrapper">
+                    <!-- Vídeo incrustado: highlights de UFC 229 -->
+                    <iframe id="featuredVideo" src="https://www.youtube.com/embed/xdQE6PrbSC4" title="Vídeo destacado Khabib vs McGregor" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galería eliminada: imágenes distribuidas en las secciones correspondientes -->
+
+        <!-- Lightbox modal (uso con imágenes .lightbox-trigger) -->
+        <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Visor de imágenes" tabindex="-1">
+            <div class="controls">
+                <button id="prevBtn" aria-label="Imagen anterior">‹</button>
+                <button id="nextBtn" aria-label="Siguiente imagen">›</button>
+            </div>
+            <button id="closeBtn" class="lb-close" aria-label="Cerrar visor">×</button>
+            <img id="lightboxImg" src="" alt="">
+        </div>
+
+        </div>
 
     <footer>
         <p>&copy; 2025 Khabib Nurmagomedov - The Eagle. Página creada con fines educativos.</p>
         <p style="color: #ff0000;">🦅 "Alhamdulillah for everything" - Khabib Nurmagomedov</p>
+        <div class="socials">
+            <a href="https://www.instagram.com/khabib_nurmagomedov" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.youtube.com/results?search_query=khabib+nurmagomedov" target="_blank" rel="noopener">YouTube</a>
+            <a href="https://en.wikipedia.org/wiki/Khabib_Nurmagomedov" target="_blank" rel="noopener">Wiki</a>
+        </div>
     </footer>
+
+    <button id="topBtn" class="top-btn" title="Volver arriba">↑</button>
+
+    <script>
+        // Mostrar botón volver arriba cuando se hace scroll
+        const topBtn = document.getElementById('topBtn');
+        if (topBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) topBtn.style.display = 'block'; else topBtn.style.display = 'none';
+            });
+            topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        }
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        if (menuToggle && mainNav) {
+            // Ensure aria attributes exist
+            if (!menuToggle.hasAttribute('aria-expanded')) menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.addEventListener('click', () => {
+                const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                menuToggle.setAttribute('aria-expanded', String(!expanded));
+                if (!expanded) { mainNav.setAttribute('aria-hidden', 'false'); mainNav.style.display = 'flex'; } else { mainNav.setAttribute('aria-hidden', 'true'); mainNav.style.display = ''; }
+            });
+        }
+
+        // Lightbox functionality (works with images that have class .lightbox-trigger)
+        const imgs = Array.from(document.querySelectorAll('.lightbox-trigger'));
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            if (!lightbox || imgs.length === 0) return;
+            currentIndex = index;
+            const source = imgs[currentIndex].getAttribute('src');
+            const alt = imgs[currentIndex].getAttribute('alt') || '';
+            lightboxImg.src = source;
+            lightboxImg.alt = alt;
+            lightbox.classList.add('show');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            // move focus into the dialog for accessibility
+            lightbox.focus();
+        }
+
+        function closeLightbox() {
+            if (!lightbox) return;
+            lightbox.classList.remove('show');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            // restore focus to the triggering image if possible
+            if (imgs[currentIndex]) imgs[currentIndex].focus();
+        }
+
+        function showNext() { if (imgs.length === 0) return; currentIndex = (currentIndex + 1) % imgs.length; openLightbox(currentIndex); }
+        function showPrev() { if (imgs.length === 0) return; currentIndex = (currentIndex - 1 + imgs.length) % imgs.length; openLightbox(currentIndex); }
+
+        if (imgs.length > 0 && lightbox && lightboxImg) {
+            imgs.forEach((img, i) => {
+                img.setAttribute('tabindex', '0');
+                img.style.cursor = 'pointer';
+                img.addEventListener('click', () => openLightbox(i));
+                img.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') openLightbox(i); });
+            });
+
+            if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+            if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+            if (closeBtn) closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+
+            lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('show')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') showNext();
+                if (e.key === 'ArrowLeft') showPrev();
+            });
+        }
+    </script>
 </body>
 </html>
