@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Medios - Khabib Nurmagomedov</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
     <style>.hero{min-height:220px;padding:70px 20px}</style>
 </head>
@@ -33,10 +34,10 @@
         <section>
             <h2>Galería</h2>
             <div class="gallery-grid">
-                <img src="images/khabib2.jpg" alt="Khabib en competición" class="lightbox-trigger" loading="lazy">
-                <img src="images/khabib3.jpg" alt="Khabib entrenando" class="lightbox-trigger" loading="lazy">
-                <img src="images/khabib4.jpg" alt="Khabib con su familia" class="lightbox-trigger" loading="lazy">
-                <img src="images/khabib1.jpg" alt="Khabib en UFC" class="lightbox-trigger" loading="lazy">
+                <img src="images/khabib2.jpg" alt="Khabib en competición" class="lightbox-trigger" loading="lazy" data-caption="Khabib en competición">
+                <img src="images/khabib3.jpg" alt="Khabib entrenando" class="lightbox-trigger" loading="lazy" data-caption="Khabib entrenando">
+                <img src="images/khabib4.jpg" alt="Khabib con su familia" class="lightbox-trigger" loading="lazy" data-caption="Khabib con su familia">
+                <img src="images/khabib1.jpg" alt="Khabib en UFC" class="lightbox-trigger" loading="lazy" data-caption="Khabib en UFC">
             </div>
         </section>
 
@@ -71,64 +72,9 @@
         </div>
         <button id="closeBtn" class="lb-close" aria-label="Cerrar visor">×</button>
         <img id="lightboxImg" src="" alt="">
+        <div class="caption" aria-hidden="true"></div>
     </div>
 
-    <script>
-        // Mobile menu (shared)
-        const menuToggle = document.querySelector('.menu-toggle');
-        const mainNav = document.getElementById('main-nav');
-        if (menuToggle) menuToggle.addEventListener('click', () => {
-            const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-            menuToggle.setAttribute('aria-expanded', String(!expanded));
-            if (mainNav) mainNav.setAttribute('aria-hidden', String(expanded));
-            if (mainNav) mainNav.style.display = expanded ? 'none' : 'flex';
-        });
-
-        // Lightbox (media page)
-        (function () {
-            const imgs = Array.from(document.querySelectorAll('.lightbox-trigger'));
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightboxImg');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const closeBtn = document.getElementById('closeBtn');
-            if (!imgs.length || !lightbox) return;
-            let currentIndex = 0;
-
-            function openLightbox(index) {
-                currentIndex = index;
-                lightboxImg.src = imgs[currentIndex].src;
-                lightboxImg.alt = imgs[currentIndex].alt || '';
-                lightbox.classList.add('show');
-                lightbox.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-            }
-            function closeLightbox() {
-                lightbox.classList.remove('show');
-                lightbox.setAttribute('aria-hidden', 'true');
-                document.body.style.overflow = '';
-            }
-            function showNext() { currentIndex = (currentIndex + 1) % imgs.length; openLightbox(currentIndex); }
-            function showPrev() { currentIndex = (currentIndex - 1 + imgs.length) % imgs.length; openLightbox(currentIndex); }
-
-            imgs.forEach((img, i) => {
-                img.setAttribute('tabindex', '0');
-                img.addEventListener('click', () => openLightbox(i));
-                img.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') openLightbox(i); });
-            });
-
-            if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
-            if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
-            if (closeBtn) closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
-            if (lightbox) lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-            document.addEventListener('keydown', (e) => {
-                if (lightbox.classList.contains('show')) {
-                    if (e.key === 'Escape') closeLightbox();
-                    if (e.key === 'ArrowRight') showNext();
-                    if (e.key === 'ArrowLeft') showPrev();
-                }
-            });
-        })();
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Peleas - Khabib Nurmagomedov</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
     <style>.hero{min-height:220px;padding:70px 20px}</style>
 </head>
@@ -75,15 +76,6 @@
         <p>&copy; 2025 Página educativa sobre Khabib</p>
     </footer>
 
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const mainNav = document.getElementById('main-nav');
-        if (menuToggle) menuToggle.addEventListener('click', () => {
-            const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-            menuToggle.setAttribute('aria-expanded', String(!expanded));
-            mainNav.setAttribute('aria-hidden', String(expanded));
-            mainNav.style.display = expanded ? 'none' : 'flex';
-        });
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
