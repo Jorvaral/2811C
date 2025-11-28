@@ -245,8 +245,8 @@
         .lb-close { position: absolute; top: 18px; right: 18px; font-size: 26px; padding: 8px 12px; border-radius: 8px; }
 
         /* VIDEO */
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; min-height: 320px; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; display: block; }
 
         /* FOOTER */
         footer {
@@ -468,8 +468,11 @@
             <div class="container">
                 <p>Highlights del combate UFC 229 (Khabib Nurmagomedov vs Conor McGregor), celebrado el 6 de octubre de 2018.</p>
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/xdQE6PrbSC4" title="Vídeo destacado Khabib vs McGregor" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/xdQE6PrbSC4" title="Vídeo destacado Khabib vs McGregor" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
+                <p style="margin-top:12px; text-align:center;">
+                    <a href="https://www.youtube.com/watch?v=xdQE6PrbSC4" target="_blank" rel="noopener">Ver vídeo en YouTube</a>
+                </p>
             </div>
         </section>
 
