@@ -96,22 +96,69 @@
     // Init on DOMContentLoaded
     document.addEventListener('DOMContentLoaded', () => {
         initLightbox();
+        initVideoCover();
         initReveal();
+        initFightsFilter();
     });
+
+    // Try to load a local video cover image (images/video-cover.jpg).
+    // If the file exists, use it as the background of the .video-card so
+    // the original cover appears without requiring external requests.
+    function initVideoCover() {
+        const preview = document.querySelector('.video-preview');
+        if (!preview) return;
+        const card = preview.querySelector('.video-card');
+        if (!card) return;
+
+        const coverPath = 'images/video-cover.jpg';
+        const img = new Image();
+        img.src = coverPath;
+
+        img.onload = function () {
+            // Apply the cover as a background while keeping the play icon visible
+            card.style.backgroundImage = `linear-gradient(180deg, rgba(0,0,0,0.35), rgba(10,12,20,0.45)), url("${coverPath}")`;
+            card.style.backgroundSize = 'cover';
+            card.style.backgroundPosition = 'center';
+            card.classList.add('has-cover');
+        };
+
+        // If image fails to load, do nothing and keep the neutral placeholder
+        img.onerror = function () {
+            // noop
+        };
+    }
 
     // Reveal on scroll using IntersectionObserver
     function initReveal() {
         if (!('IntersectionObserver' in window)) return;
         const items = Array.from(document.querySelectorAll('.reveal'));
         if (!items.length) return;
+
         const io = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                    io.unobserve(entry.target);
+                if (!entry.isIntersecting) return;
+
+                // compute a simple stagger based on siblings order
+                try {
+                    const el = entry.target;
+                    const parent = el.parentElement;
+                    if (parent) {
+                        const siblings = Array.from(parent.querySelectorAll('.reveal'));
+                        const idx = siblings.indexOf(el);
+                        if (idx >= 0) {
+                            el.style.setProperty('--reveal-delay', `${idx * 80}ms`);
+                            el.classList.add('stagger-child');
+                        }
+                    }
+                } catch (err) {
+                    // ignore
                 }
+
+                entry.target.classList.add('show');
+                io.unobserve(entry.target);
             });
         }, { threshold: 0.12 });
+
         items.forEach(i => io.observe(i));
     }
 
